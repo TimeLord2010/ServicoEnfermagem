@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_enfermeiros/Custom%20Widgets/passwordWidget.dart';
 
+import 'checkEmail.dart';
+
 class RegisterCredentials extends StatefulWidget {
   RegisterCredentials({Key key, this.title}) : super(key: key);
 
@@ -20,7 +22,7 @@ class _RegisterCredentials extends State<RegisterCredentials> {
     }
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => RegisterCredentials()),
+      MaterialPageRoute(builder: (context) => CheckEmail()),
     );
   }
 
