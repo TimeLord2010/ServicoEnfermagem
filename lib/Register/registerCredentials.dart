@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:portal_enfermeiros/Custom%20Widgets/passwordWidget.dart';
+import 'package:toast/toast.dart';
 
 import 'checkEmail.dart';
 
@@ -14,7 +15,10 @@ class RegisterCredentials extends StatefulWidget {
 }
 
 class _RegisterCredentials extends State<RegisterCredentials> {
+
   final _formKey = GlobalKey<FormState>();
+  String email;
+  String pwd;
 
   void next() {
     if (!_formKey.currentState.validate()) {
@@ -56,15 +60,24 @@ class _RegisterCredentials extends State<RegisterCredentials> {
                         if (value.isEmpty) {
                           return 'Email não pode ser vazio';
                         }
-                        if (!value.contains('@')) {
+                        // # !value.contains('@') && !value.contains('.')
+                        if (!RegExp('^.+@.+\\\..+\$').hasMatch(value)) {
                           return 'Email não é válido';
                         }
                         return null;
                       },
+                      onChanged: (value) {
+                        email = value;
+                      },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    PasswordWidget(label: 'Senha'),
-                    PasswordWidget(label: 'Confirmar senha')
+                    PasswordWidget(label: 'Senha', onChanged: (v) => pwd = v,),
+                    PasswordWidget(label: 'Confirmar senha', validator: (v) {
+                      //Toast.show(pwd, context, gravity: Toast.CENTER, duration: Toast.LENGTH_SHORT);
+                      if (v != pwd) {
+                        return "As senha não são iguais.";
+                      }
+                    })
                   ],
                 ))));
   }
