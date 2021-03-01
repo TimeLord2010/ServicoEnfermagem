@@ -6,7 +6,6 @@ class CheckEmail extends StatefulWidget {
 }
 
 class _CheckEmail extends State<CheckEmail> {
-
   void next() {
     Navigator.push(
       context,
@@ -31,28 +30,8 @@ class _CheckEmail extends State<CheckEmail> {
       ),
       body: Container(
         margin: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Nome'
-              ),
-              validator: (value) {
-                return null;
-              },
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'CPF'
-              ),
-              validator: (value) {
-                return null;
-              },
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-            )
-          ]
-        ),
+        child: Text(
+            "Cheque sua caixa de email para a confirmação. Caso não encontre, verifique a lixeira e caixa de spam."),
       ),
     );
   }

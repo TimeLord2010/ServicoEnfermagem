@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:portal_enfermeiros/Custom%20Widgets/passwordWidget.dart';
+import 'package:portal_enfermeiros/UI/Custom%20Widgets/passwordWidget.dart';
 import 'package:toast/toast.dart';
 
-import 'checkEmail.dart';
+import '2-checkEmail.dart';
 
 class RegisterCredentials extends StatefulWidget {
   RegisterCredentials({Key key, this.title}) : super(key: key);
@@ -15,7 +15,6 @@ class RegisterCredentials extends StatefulWidget {
 }
 
 class _RegisterCredentials extends State<RegisterCredentials> {
-
   final _formKey = GlobalKey<FormState>();
   String email;
   String pwd;
@@ -52,6 +51,7 @@ class _RegisterCredentials extends State<RegisterCredentials> {
                 child: Column(
                   children: [
                     TextFormField(
+                      initialValue: 'myemail@gmail.com',
                       decoration: const InputDecoration(
                         labelText: 'Email',
                         hintText: 'meuemail@empresa.com',
@@ -71,13 +71,21 @@ class _RegisterCredentials extends State<RegisterCredentials> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    PasswordWidget(label: 'Senha', onChanged: (v) => pwd = v,),
-                    PasswordWidget(label: 'Confirmar senha', validator: (v) {
-                      //Toast.show(pwd, context, gravity: Toast.CENTER, duration: Toast.LENGTH_SHORT);
-                      if (v != pwd) {
-                        return "As senha não são iguais.";
-                      }
-                    })
+                    PasswordWidget(
+                      label: 'Senha',
+                      initialValue: 'complexPassword123',
+                      onChanged: (v) => pwd = v,
+                    ),
+                    PasswordWidget(
+                        label: 'Confirmar senha',
+                        initialValue: 'complexPassword123',
+                        validator: (v) {
+                          //Toast.show(pwd, context, gravity: Toast.CENTER, duration: Toast.LENGTH_SHORT);
+                          // if (v != pwd) {
+                          //   return "As senha não são iguais.";
+                          // }
+                          return null;
+                        })
                   ],
                 ))));
   }

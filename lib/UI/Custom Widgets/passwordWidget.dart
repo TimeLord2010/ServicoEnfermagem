@@ -22,20 +22,29 @@
 import 'package:flutter/material.dart';
 
 class PasswordWidget extends StatefulWidget {
-
-  PasswordWidget({this.label, this.validator, this.onChanged});
+  PasswordWidget(
+      {this.label, this.validator, this.onChanged, this.initialValue});
 
   final String label;
+  final String initialValue;
   final Function(String) validator;
   final Function(String) onChanged;
 
-  _PasswordWidget createState() => _PasswordWidget(label: label, validator: validator, onChanged: onChanged);
+  _PasswordWidget createState() => _PasswordWidget(
+      label: label,
+      validator: validator,
+      initialValue: initialValue,
+      onChanged: onChanged);
 }
 
 class _PasswordWidget extends State<PasswordWidget> {
-
-  _PasswordWidget({String label, Function(String) validator, Function(String) onChanged}) {
+  _PasswordWidget(
+      {String label,
+      String initialValue,
+      Function(String) validator,
+      Function(String) onChanged}) {
     this.label = label;
+    this.initialValue = initialValue;
     this.validator = validator;
     this.onChanged = onChanged;
   }
@@ -44,6 +53,7 @@ class _PasswordWidget extends State<PasswordWidget> {
   Function(String) validator;
   Function(String) onChanged;
   String label;
+  String initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +61,7 @@ class _PasswordWidget extends State<PasswordWidget> {
       keyboardType: TextInputType.text,
       //controller: _userPasswordController,
       obscureText: !_passwordVisible,
+      initialValue: initialValue,
       decoration: InputDecoration(
         labelText: label,
         hintText: '******',
@@ -70,7 +81,8 @@ class _PasswordWidget extends State<PasswordWidget> {
         if (value.length < 6) {
           return 'Senha deve ter ao menos 6 caracteres.';
         }
-        if (RegExp('\.').allMatches(value).map((e) => e[0]).toSet().length < 3) {
+        if (RegExp('\.').allMatches(value).map((e) => e[0]).toSet().length <
+            3) {
           return 'A senha deve conter pelo menos 3 caracteres diferentes.';
         }
         if (validator != null) return validator(value);
