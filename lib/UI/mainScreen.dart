@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portal_enfermeiros/UI/Search/1-searchFilters.dart';
 
 class MainWindow extends StatefulWidget {
   @override
@@ -19,18 +20,45 @@ class _MainWindow extends State<MainWindow> {
     return Container(
       child: Text(
         t,
-        style: TextStyle(color: Colors.black38, fontSize: 18),
+        style: TextStyle(color: Colors.black38, fontSize: 16),
       ),
       alignment: Alignment.centerLeft,
       margin: EdgeInsets.all(2),
     );
   }
 
-  Container generateBox() {
+  Container generateBox({Widget content}) {
     return Container(
-      //color: Colors.amberAccent,
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: content,
+              decoration: BoxDecoration(
+                  //color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+            ),
+          ),
+          Divider(
+            color: Colors.grey,
+            indent: 10,
+            endIndent: 10,
+            thickness: 1,
+            height: 5,
+          ),
+          Container(
+            height: 35,
+            child: Center(
+              child: Text(
+                "Mais",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          )
+        ],
+      ),
       decoration: BoxDecoration(
-          color: Colors.amberAccent,
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.4),
@@ -51,7 +79,12 @@ class _MainWindow extends State<MainWindow> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchFilter()),
+          );
+        },
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
